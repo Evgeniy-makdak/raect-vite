@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 export default function OurDescription({ title, description }) {
   return (
     <li>

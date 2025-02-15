@@ -1,5 +1,10 @@
-import './button.css'
+import "./button.css";
 
-export default function Button({button}) {
-    return <button className="button">{button}</button>
+// eslint-disable-next-line react/prop-types
+export default function Button({ button, onClick }) {
+  return (
+    <button onClick={onClick} className="button active">
+      {button}
+    </button>
+  );
 }
