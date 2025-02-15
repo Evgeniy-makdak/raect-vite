@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto:wght@400;700&family=Titillium+Web&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+header {
+  margin-top: 30px;
+  padding: 0 2rem;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.logo {
+  height: 50px;
+}
+
+.time {
+  font-size: 1rem;
+}
+
+main {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 1rem;
+  padding-top: 2rem;
+}
+
+.mainTitle {
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+
+h1 {
+  margin-bottom: 1rem;
+}
+
+section ul {
+  list-style: none;
+}
+
+section ul li {
+  max-width: 70vw;
+  border: 2px solid #c9c7c7;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+
+.content,
+p {
+  padding: 1rem 0;
+}
