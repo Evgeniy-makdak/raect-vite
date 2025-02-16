@@ -1,7 +1,13 @@
+import { useState } from 'react';
 import logo from '/images/logo.jpg'
 
 export default function Header() {
-    const currentTime = new Date().toLocaleTimeString('ru-RU', { hour12: false });
+    const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString('ru-RU', { hour12: false }));
+
+    const timeNow = setInterval(() => {
+        setCurrentTime(new Date().toLocaleTimeString('ru-RU', { hour12: false }));
+        clearInterval(timeNow);
+    }, 1000)
     
     return (
         <header>
