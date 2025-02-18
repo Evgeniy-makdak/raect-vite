@@ -6,26 +6,26 @@ import Button from "./components/button/Button";
 import { useState } from "react";
 
 function App() {
-const [title, setTitle] = useState("Выбери нужный тебе раздел:");
+const [contentType, setContentType] = useState(null)
 
   function buttonClick(title) {
-    setTitle(title)
+    setContentType(title)
   }
   return (
     <div>
       <Header />
       <h1 className="mainTitle">React быстро</h1>
       <section>
-        <h2>{differences[title]}</h2>
+        <h2>{differences[contentType]}</h2>
         <ul>
           <OurDescription {...ways[0]} />
-          <Button {...ways[0]} onClick={() => buttonClick("way")} />
+          <Button {...ways[0]} isActive={contentType === 'way'} onClick={() => buttonClick("way")} />
           <OurDescription {...ways[1]} />
-          <Button {...ways[1]} onClick={() => buttonClick("easy")} />
+          <Button {...ways[1]} isActive={contentType === 'easy'} onClick={() => buttonClick("easy")} />
           <OurDescription {...ways[2]} />
-          <Button {...ways[2]} onClick={() => buttonClick("program")} />
+          <Button {...ways[2]} isActive={contentType === 'program'} onClick={() => buttonClick("program")} />
           <OurDescription {...ways[3]} />
-          <Button {...ways[3]} onClick={() => buttonClick("result")} />
+          <Button {...ways[3]} isActive={contentType === 'result'} onClick={() => buttonClick("result")} />
         </ul>
       </section>
     </div>
