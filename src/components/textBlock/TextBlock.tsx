@@ -1,57 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function TextBlock() {
+interface TextBlockProps {
+  isActive: boolean;
+}
+
+export default function TextBlock({ isActive }: TextBlockProps) {
   const [value, setValue] = useState("");
   const [show, setShow] = useState(false);
+  const [users, setUsers] = useState<{ id: number; name: string }[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  function handleKeyDown(e: React.KeyboardEvent) {
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") {
       setShow(true);
     }
   }
 
+  const inputStyle = {
+    border: isActive && value === "" ? "1px solid #000" : "none",
+    outline: "none",
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    const userList = async function () {
+      const responce = await fetch(
+        "https://jsonplaceholder.typicode.com/users"
+      );
+      const users = await responce.json();
+      setUsers(users);
+      setLoading(false);
+    };
+    userList();
+  }, []);
+
   return (
     <>
-      <p>My input text: {value}</p>
-      <div style={styles.container}>
-        <input
-          style={styles.input}
-          type="text"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
-      </div>
+      <p style={{ margin: "3rem" }}>My input text: </p> {show && <p>{value}</p>}
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onKeyDown={handleKeyDown}
+        style={inputStyle}
+      />
+      {loading && <p>lodind...</p>}
+      {!loading && (
+        <ul>
+          {users.map((user) => (
+            <li key={user.id}>{user.name}</li>
+          ))}
+        </ul>
+      )}
     </>
   );
 }
-
-const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "10px",
-    maxWidth: "300px",
-    margin: "20px auto",
-    padding: "20px",
-    border: "1px solid #ccc",
-    borderRadius: "8px",
-  },
-  input: {
-    padding: "8px 12px",
-    fontSize: "16px",
-    border: "1px solid #ddd",
-    borderRadius: "4px",
-    outline: "none",
-    ":focus": {
-      borderColor: "#4a90e2",
-      boxShadow: "0 0 0 2px rgba(74, 144, 226, 0.2)",
-    },
-  },
-  text: {
-    margin: "0",
-    padding: "8px",
-    backgroundColor: "#f5f5f5",
-    borderRadius: "4px",
-  },
-};
